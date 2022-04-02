@@ -1,11 +1,10 @@
 import React from "react";
-import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import svg from "../../images/indicator.svg";
 
-const BlogDetails = ({ blog }) => {
-  console.log(blog);
-
-  const { admin, story, imageName, imageURL, title } = blog;
+const BlogDetails = ({ item }) => {
+  console.log(item._id);
+  const { admin, blog, imageName, imageURL, title } = item;
   return (
     <div className="flex justify-between max-w-5xl mx-auto my-20">
       <div>
@@ -16,11 +15,11 @@ const BlogDetails = ({ blog }) => {
         <h1 className="text-3xl">{title}</h1>
         <p className="flex items-center pt-2">
           <img className="pr-3" src={svg} alt=""></img>
-          {admin}
+          {admin && "Labib Ahmed"}
         </p>
         <p className="pt-5">
-          {story.length > 400 ? story.slice(0, 390) : story}...
-          <Link className=" text-md font-semibold text-[#155479]" to={`blogdetail/${blog._id}`}>
+          {blog.length > 400 ? blog.slice(0, 390) : blog}...
+          <Link className=" text-md font-semibold text-[#155479]" to={`singleblog/${item._id}`}>
             Read More
           </Link>
         </p>

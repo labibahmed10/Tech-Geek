@@ -5,15 +5,15 @@ const Home = () => {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
-    fetch("Blogs.json")
+    fetch("https://retro-tech-talks.herokuapp.com/blogs")
       .then((res) => res.json())
       .then((data) => setBlogs(data));
   }, []);
-  console.log(blogs);
+
   return (
     <div>
-      {blogs.map((blog) => (
-        <BlogDetails key={blog._id} blog={blog}></BlogDetails>
+      {blogs.map((item) => (
+        <BlogDetails key={item._id} item={item}></BlogDetails>
       ))}
     </div>
   );
