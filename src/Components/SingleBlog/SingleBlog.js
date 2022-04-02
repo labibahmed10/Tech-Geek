@@ -5,9 +5,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 
 const SingleBlog = () => {
   const { blogid } = useParams();
-
   const [singleBlog, setSingleBlog] = useState([]);
-  console.log(singleBlog);
 
   useEffect(() => {
     fetch(`https://retro-tech-talks.herokuapp.com/getBlog/${blogid}`)
@@ -19,7 +17,7 @@ const SingleBlog = () => {
   return (
     <div>
       <div className="h-64 text-[#2d7faf] bg-gradient-to-r from-sky-900 to-sky-600">
-        <Link className="ml-5 py-4 text-white text-2xl flex items-center w-24" to="/home">
+        <Link className="ml-5 py-4 text-white text-2xl flex items-center w-24" to="/">
           <IoMdArrowRoundBack className="pr-1 text-3xl"></IoMdArrowRoundBack> Back
         </Link>
 

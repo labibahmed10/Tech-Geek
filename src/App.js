@@ -13,10 +13,8 @@ function App() {
       <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
-        <Route path="/home" element={<Home></Home>}></Route>
-        {/* <Route path="/singleblog/:blogid" element={<SingleBlog></SingleBlog>}></Route> */}
-        <Route path="/singleblog/:blogid" element={<SingleBlog></SingleBlog>}></Route>
         <Route path="/videos" element={<Videos></Videos>}></Route>
+        <Route path="/blogdetails/:blogid" element={<SingleBlog></SingleBlog>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
