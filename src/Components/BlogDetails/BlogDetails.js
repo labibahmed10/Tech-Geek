@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import svg from "../../images/indicator.svg";
 
 const BlogDetails = ({ item }) => {
-  const { admin, blog, imageName, imageURL, title } = item;
+  const { admin, story, imageName, imageURL, title } = item;
   return (
     <div className="flex justify-between max-w-5xl mx-auto my-20">
       <div>
@@ -17,7 +17,7 @@ const BlogDetails = ({ item }) => {
           {admin && "Labib Ahmed"}
         </p>
         <p className="pt-5">
-          {blog.length > 400 ? blog.slice(0, 390) : blog}...
+          {story.length > 400 ? story?.slice(0, 390) : story}...
           <Link className=" text-md font-semibold text-[#155479]" to={`blogdetails/${item._id}`}>
             Read More
           </Link>

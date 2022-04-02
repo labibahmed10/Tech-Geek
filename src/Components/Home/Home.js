@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
+import { BlogContext } from "../../App";
 import BlogDetails from "../BlogDetails/BlogDetails";
 
 const Home = () => {
-  const [blogs, setBlogs] = useState([]);
+  // const [blogs, setBlogs] = useState([]);
+
+  const [blogs, setBlogs] = useContext(BlogContext); //context used for the first time
 
   useEffect(() => {
-    fetch("https://retro-tech-talks.herokuapp.com/blogs")
+    fetch("blogs.json")
       .then((res) => res.json())
       .then((data) => setBlogs(data));
   }, []);

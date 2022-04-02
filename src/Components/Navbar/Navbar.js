@@ -5,7 +5,7 @@ import logo from "../../images/logo.png";
 const Navbar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  console.log(pathname);
+
   return (
     <div
       className={`${

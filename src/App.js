@@ -1,3 +1,4 @@
+import { createContext, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./Components/Home/Home";
@@ -7,9 +8,12 @@ import NotFound from "./Components/NotFound/NotFound";
 import SingleBlog from "./Components/SingleBlog/SingleBlog";
 import Videos from "./Components/Videos/Videos";
 
+export const BlogContext = createContext();
+
 function App() {
+  const [blogs, setBlogs] = useState([]);
   return (
-    <div className="App">
+    <BlogContext.Provider value={[blogs, setBlogs]}>
       <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
@@ -18,7 +22,7 @@ function App() {
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
-    </div>
+    </BlogContext.Provider>
   );
 }
 
