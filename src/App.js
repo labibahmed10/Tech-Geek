@@ -5,6 +5,7 @@ import Home from "./Components/Home/Home";
 import Login from "./Components/Login/Login";
 import Navbar from "./Components/Navbar/Navbar";
 import NotFound from "./Components/NotFound/NotFound";
+import SignUp from "./Components/signUp/SignUp";
 import SingleBlog from "./Components/SingleBlog/SingleBlog";
 import Videos from "./Components/Videos/Videos";
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/videos" element={<Videos></Videos>}></Route>
         <Route path="/blogdetails/:blogid" element={<SingleBlog></SingleBlog>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>
+        <Route path="/signup" element={<SignUp></SignUp>}></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
       </Routes>
     </BlogContext.Provider>
