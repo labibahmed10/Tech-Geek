@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import app from "../../firebase.init";
+
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+
+const auth = getAuth(app);
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const [error2, setError2] = useState("");
 
   const handleEmail = (event) => {
     const value = event.target.value;
@@ -24,6 +30,12 @@ const Login = () => {
 
   const handleConfirmPassword = (event) => {
     const value = event.target.value;
+
+    if (password !== value) {
+      setError2("password confirmation required");
+    } else {
+      setError2("");
+    }
     setConfirmPassword(value);
   };
 
@@ -32,6 +44,14 @@ const Login = () => {
 
     if (!email && !password) {
     }
+  };
+
+  const handleGoogleSignin = () => {
+    const googleProvider = new GoogleAuthProvider();
+
+    signInWithPopup(auth, googleProvider)
+      .then((res) => console.log(res.user))
+      .catch((error) => console.log(error.message));
   };
 
   return (
@@ -83,6 +103,7 @@ const Login = () => {
               required
             />
           </div>
+          {password && <p className="text-red-500 text-xs pt-1">{error2}</p>}
           <button
             className="block mt-8 w-full py-2
          px-4 bg-[#42a0d6] rounded-md text-white hover:bg-[#3a8cbb]"
@@ -91,13 +112,16 @@ const Login = () => {
           </button>
 
           <p className="text-sm my-2 text-gray-600">
-            New to Tech Geeks?{" "}
+            New to Tech Geeks?
             <Link className="underline text-[#39a2df]" to="/">
               Create an Account
             </Link>
           </p>
 
-          <div className="flex cursor-pointer items-center justify-evenly py-3 mt-5 shadow-md bg-[#F8FAFC] border border-[#39a2df]">
+          <div
+            onClick={handleGoogleSignin}
+            className="flex cursor-pointer items-center justify-evenly py-3 mt-5 shadow-md bg-[#F8FAFC] border border-[#39a2df]"
+          >
             <img
               className="w-7 object-contain"
               src="https://developers.google.com/identity/images/g-logo.png"
