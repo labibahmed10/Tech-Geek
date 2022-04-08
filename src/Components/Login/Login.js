@@ -3,16 +3,40 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleEmail = (event) => {
+    const value = event.target.value;
+    setEmail(value);
+  };
+
+  const handlePassword = (event) => {
+    const value = event.target.value;
+    if (!/(?=.*?[A-Z0-9])/.test(value)) {
+      setError("Password must contain a number and uppercase letter");
+    } else {
+      setError("");
+    }
+    setPassword(value);
+  };
+
+  const handleConfirmPassword = (event) => {
+    const value = event.target.value;
+    setConfirmPassword(value);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-  };
 
-  const handleEmail = (event) => {};
+    if (!email && !password) {
+    }
+  };
 
   return (
     <div className=" h-[80vh] flex justify-center items-center ">
-      <div className="border py-6 px-8 text-[#3a8cbb] shadow-xl w-80 h-auto">
+      <div className="border py-6 px-8 text-[#3a8cbb] shadow-xl w-96 h-auto">
         <h1 className="text-center pb-10 text-2xl ">Login</h1>
 
         <form action="" onSubmit={handleSubmit}>
@@ -21,7 +45,7 @@ const Login = () => {
               Email:
             </label>
             <input
-              onBlur={handleEmail}
+              onChange={handleEmail}
               className="border-2 rounded-md border-[#39a2df] px-5 py-2 w-full focus:outline-0"
               type="email"
               name="email"
@@ -35,20 +59,23 @@ const Login = () => {
               Password:
             </label>
             <input
-              className="border-2 rounded-md border-[#39a2df] px-5 py-2 w-full "
+              onChange={handlePassword}
+              className="border-2 rounded-md border-[#39a2df] px-5 py-2 w-full focus:outline-0"
               type="password"
               name="password"
               id="pasword"
               placeholder="Type Password"
               required
             />
+            {password && <p className="text-red-500 text-xs pt-1">{error}</p>}
           </div>
           <div className="mb-2">
             <label className="block pb-1" htmlFor="password">
               Confirm Password:
             </label>
             <input
-              className="border-2 rounded-md border-[#39a2df] px-5 py-2 w-full "
+              onChange={handleConfirmPassword}
+              className="border-2 rounded-md border-[#39a2df] px-5 py-2 w-full focus:outline-0"
               type="password"
               name="password"
               id="pasword"
