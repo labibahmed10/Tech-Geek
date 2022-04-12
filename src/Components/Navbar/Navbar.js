@@ -1,33 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../images/logo.png";
-import userpic from "../../images/user.png";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import app from "../../firebase.init";
-const auth = getAuth(app);
 
 const Navbar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const [user, setUser] = useState({});
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser("");
-        // User is signed out
-        // ...
-      }
-    });
-  }, []);
-
-  const signOutId = () => {
-    signOut(auth);
-  };
-
-  // console.log(user);
 
   return (
     <div
@@ -40,28 +17,17 @@ const Navbar = () => {
         <NavLink className={({ isActive }) => (isActive ? "text-[#1D6DA8]" : "text-blue-400")} to="/">
           Home
         </NavLink>
+
         <NavLink className={({ isActive }) => (isActive ? "text-[#1D6DA8]" : "text-blue-400")} to="/videos">
           Videos
         </NavLink>
-        {user?.email ? (
-          <NavLink
-            onClick={signOutId}
-            className={({ isActive }) => (isActive ? "text-[#1D6DA8]" : "text-blue-400")}
-            to="/login"
-          >
-            Log Out
-          </NavLink>
-        ) : (
-          <NavLink className={({ isActive }) => (isActive ? "text-[#1D6DA8]" : "text-blue-400")} to="/login">
-            Log in
-          </NavLink>
-        )}
+
+        <NavLink className={({ isActive }) => (isActive ? "text-[#1D6DA8]" : "text-blue-400")} to="/login">
+          Log in
+        </NavLink>
+
         <div>
-          <img
-            className="w-7 object-cover bg-transparent"
-            src={user?.photoURL ? user.photoURL : userpic}
-            alt=""
-          />
+          <img className="w-7 object-cover bg-transparent" alt="" />
         </div>
       </div>
     </div>
