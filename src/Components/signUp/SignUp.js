@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase.init";
 
@@ -8,6 +8,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [conPass, setConPass] = useState("");
   const [error1, setError1] = useState("");
+  const navigate = useNavigate();
   const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
 
   const handleEmailOfUser = (event) => {
@@ -33,6 +34,10 @@ const SignUp = () => {
       createUserWithEmailAndPassword(email, password);
     }
   };
+
+  if (user) {
+    navigate("/login");
+  }
 
   return (
     <div className=" h-[80vh] flex justify-center items-center ">
@@ -81,6 +86,7 @@ const SignUp = () => {
             />
           </div>
           {<p className="text-red-500 text-xs ">{error1 ? error1 : ""}</p>}
+          {<p className="text-red-500 text-xs ">{error ? error?.message : ""}</p>}
           <button
             type="submit"
             className="block mt-8 w-full py-2

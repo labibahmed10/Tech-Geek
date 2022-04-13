@@ -1,10 +1,19 @@
+import { signOut } from "firebase/auth";
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { auth } from "../../firebase.init";
 import logo from "../../images/logo.png";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+  const [user] = useAuthState(auth);
+
+  const logOut = () => {
+    signOut(auth);
+  };
+  console.log(user?.email);
 
   return (
     <div
@@ -22,9 +31,19 @@ const Navbar = () => {
           Videos
         </NavLink>
 
-        <NavLink className={({ isActive }) => (isActive ? "text-[#1D6DA8]" : "text-blue-400")} to="/login">
-          Log in
-        </NavLink>
+        {user?.email ? (
+          <NavLink
+            onClick={logOut}
+            className={({ isActive }) => (isActive ? "text-[#1D6DA8]" : "text-blue-400")}
+            to="/login"
+          >
+            Log Out
+          </NavLink>
+        ) : (
+          <NavLink className={({ isActive }) => (isActive ? "text-[#1D6DA8]" : "text-blue-400")} to="/login">
+            Log in
+          </NavLink>
+        )}
 
         <div>
           <img className="w-7 object-cover bg-transparent" alt="" />
